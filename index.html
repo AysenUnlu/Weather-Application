@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather Dashboard</title>
+    <script src = "https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://unpkg.com/jso/dist/jso.js"></script>
+    
+    <script src="https://maps.google.com/maps/api/js"></script>
+   
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> -->
+</head>
+<body>
+   
+    <!---------------------------------------------------------------------------------------------->
+    <div class="container-fluid">
+        
+          <!-- Modal Task for tasks -->
+          <div class="modal" id="myModal" role="dialog">
+              <div class="modal-dialog ">
+              <!-- Modal content-->
+                 <div class="modal-content">
+                     <div class="modal-header">
+                          <h4 class="modal-title text-left">Error Message</h4>
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>   
+                     </div>
+                      <div class="modal-body">
+                          <p id="msg"></p>
+                      </div>
+                      <div class="modal-footer">
+                         <button type="button" class="btn btn-default btn-danger" data-dismiss="modal">Close</button>
+                     </div>
+                 </div>
+               </div>
+       </div>
+       <!------------------------------------------------------------------------------------------->
+
+       <div class="jumbotron ml-2 mr-2 bg-dark text-center text-light p-2">
+            <h1> Weather Dashboard</h1>
+       </div> 
+
+       <div class="row">
+
+           <div class="col-sm-4 bg-light ml-4">
+                <h4 class="pt-1">Search for a City:</h4>
+
+                <div class="input-group mb-3 w-75">
+                        <input type="text" class="form-control" id="search-city" aria-label="City Search" aria-describedby="search-button">
+                        <div class="input-group-append ">
+                          <button class="btn bg-primary text-light" id="search-button"><i class="fas fa-search"></i></button>
+                        </div>
+                </div>
+                
+                <button class='list-group-item bg-warning' id='delete'><i class='fas fa-trash-alt'></i> DELETE HISTORY</button> 
+                <ul class="list-group mb-5">
+                      
+                </ul>
+
+           </div>
+
+
+           <div class="col-sm-7 ml-2">
+                  <div class="col-sm-12 info mb-4 p-3" id="weather-current">
+                   <div class="row"> 
+                     <div class="col-sm-6">
+                         <h3 class="mb-4" id="current-city"></h3>
+                         <p>Temperature: <span class="current" id="temperature" ></span></p>
+                         <p>Humidity: <span class="current" id="humidity" ></span></p>
+                         <p>Wind Speed: <span class="current" id="wind-speed" ></span></p>
+                         <p>UV Index: <span class="text-light current bg-danger pt-1 pb-1 pl-2 pr-2 rounded" id="uv-index"></span></p>
+                     </div> 
+                     <div class="col-sm-6">
+                        <button type="button" id="position">Show My Position on Google Map</button>
+                        <div id="embedMap" style="width: 300px; height: 200px;">
+                            <!--Google map will be embedded here-->
+                        </div>
+                     </div>
+                    </div>  
+                  </div>  
+
+                
+
+                <div class="col-sm-12" id="weather-future">
+                  
+                    <h3>5-Day Forecast</h3>
+                  <div class="row text-light">
+                    <div class="col-sm-2 bg-primary forecast mr-4 mt-2 p-2 rounded">
+                       <p><span class="fheading" id="fDate0" ></span></p>
+                       <p id="fImg0"></p>
+                       <p>Temp: <span id="fTemp0" ></span></p>
+                       <p>Humidity: <span id="fHumidity0" ></span></p>
+                    </div>
+                    <div class="col-sm-2 bg-primary forecast  mr-4 mt-2 p-2 rounded">
+                        <p><span class="fheading" id="fDate1" ></span></p>
+                        <p id="fImg1"></p>
+                        <p>Temp: <span id="fTemp1" ></span></p>
+                        <p>Humidity: <span id="fHumidity1" ></span></p>
+                    </div>
+
+                    <div class="col-sm-2 bg-primary forecast  mr-4 mt-2 p-2 rounded">
+                        <p><span class="fheading" id="fDate2" ></span></p>
+                        <p id="fImg2"></p>
+                        <p>Temp: <span id="fTemp2" ></span></p>
+                        <p>Humidity: <span id="fHumidity2" ></span></p>
+                    </div>
+
+                    <div class="col-sm-2 bg-primary forecast  mr-4 mt-2 p-2 rounded">
+                        <p><span class="fheading" id="fDate3" ></span></p>
+                        <p id="fImg3"></p>
+                        <p>Temp: <span id="fTemp3" ></span></p>
+                        <p>Humidity: <span id="fHumidity3" ></span></p>
+                    </div>
+
+                    <div class="col-sm-2 bg-primary forecast  mr-4 mt-2 p-2 rounded">
+                        <p><span class="fheading" id="fDate4" ></span></p>
+                        <p id="fImg4"></img>
+                        <p>Temp: <span id="fTemp4" ></span></p>
+                        <p>Humidity: <span id="fHumidity4" ></span></p>
+                    </div>
+                  </div>
+                 </div>
+            </div>
+
+            
+
+
+           </div>
+
+       </div>
+
+
+       <script src="weather.js"></script>
+       
+</body>
+
+</html>
+      
