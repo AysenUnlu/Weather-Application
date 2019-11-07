@@ -39,7 +39,7 @@ This is a Weather Dashboard application with search functionality to find curren
 
 ## Installation: ##
 
-    You can check the running project:
+    You can check the running project: https://aysenunlu.github.io/Weather-Application/
 
 ## Usage: ##
 
