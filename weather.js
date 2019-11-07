@@ -67,7 +67,7 @@
             // Displays the City, (date) and weather icon
            // console.log(response);
             var iconcode = response.weather[0].icon;
-            var iconurl = "http://openweathermap.org/img/wn/"+iconcode+"@2x.png";
+            var iconurl = "https://openweathermap.org/img/wn/"+iconcode+"@2x.png";
             var date=new Date(response.dt*1000).toLocaleDateString();
             $(currentCity).html(response.name+" ("+date+")"+"<img src="+iconurl+">");
 
@@ -118,7 +118,7 @@
 
     //Returns the UVIndex value of the city. City's coordinates are passed as parameters.
     function UVIndex(ln,lt){
-      var qURL="http://api.openweathermap.org/data/2.5/uvi?appid="+APIKey+"&lat="+lt+"&lon="+ln;
+      var qURL="https://api.openweathermap.org/data/2.5/uvi?appid="+APIKey+"&lat="+lt+"&lon="+ln;
       $.ajax({
         url:qURL,
         method: "GET"
@@ -132,7 +132,7 @@
     function forecast(cid){
         var dayover=false;
 
-        var qURL="http://api.openweathermap.org/data/2.5/forecast?id="+cid+"&appid="+APIKey;
+        var qURL="https://api.openweathermap.org/data/2.5/forecast?id="+cid+"&appid="+APIKey;
     
         $.ajax({
             url:qURL,
@@ -143,7 +143,7 @@
   
                 var date=new Date((response.list[((i+1)*8)-1].dt)*1000).toLocaleDateString();
                 var iconcode= response.list[((i+1)*8)-1].weather[0].icon;
-                var iconurl="http://openweathermap.org/img/wn/"+iconcode+".png";
+                var iconurl="https://openweathermap.org/img/wn/"+iconcode+".png";
                 var tempK=response.list[((i+1)*8)-1].main.temp;
                 var tempF=(((tempK-273.5)*1.80)+32).toFixed(2) ; //convert to Fahreniet
                 var humidity=response.list[((i+1)*8)-1].main.humidity;
