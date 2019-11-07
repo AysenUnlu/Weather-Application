@@ -95,7 +95,7 @@
            /////////////////////////////////////////////////
            if(response.cod==200){
               sCity=JSON.parse(localStorage.getItem("cname"));
-              console.log(sCity);
+             // console.log(sCity);
               if (sCity==null){
                   sCity=[];
                   sCity.push(city.toUpperCase());
@@ -154,7 +154,7 @@
                 $("#fTemp"+i).html(tempF+" &#8457");
                 $("#fHumidity"+i).html(humidity+"%");
               }
-              console.log(response);
+             // console.log(response);
                        
           });  
           
