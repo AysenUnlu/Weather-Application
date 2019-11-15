@@ -1,6 +1,5 @@
 // This is our API key. Add your own API key between the ""
-//var APIKey ="e355f99686f035518df586c2253dfad9";
-   var APIKey="91585e594bb6056507efd72ebe44b618";
+   var APIKey="YOUR API";
 
   //city="Los Angeles,US";
    var city="";
