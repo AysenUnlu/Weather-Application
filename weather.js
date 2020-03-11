@@ -1,6 +1,6 @@
 // This is our API key. Add your own API key between the ""
    $.ajax({
-    url: 'index.php',
+    url: 'test.php',
     success: function(data) {
       console.log(data);
       APIKey=data;
