@@ -1,5 +1,10 @@
 // This is our API key. Add your own API key between the ""
-   var APIKey='<?php echo $API_KEY ?>';
+   $.ajax({
+    url: 'index.php',
+    success: function(data) {
+      API_KEY=data;
+    }
+  });
 
   //city="Los Angeles,US";
    var city="";
