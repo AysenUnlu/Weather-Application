@@ -1,5 +1,5 @@
 // This is our API key. Add your own API key between the ""
-   var APIKey='<?php getenv(weather_api)?>';
+   var APIKey='<?php echo $API_KEY ?>';
 
   //city="Los Angeles,US";
    var city="";
