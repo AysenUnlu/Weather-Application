@@ -1,5 +1,5 @@
 // This is our API key. Add your own API key between the ""
-   //var APIKey=weather_api;
+   var APIKey=`{{env('weather_api')}}`;
 
   //city="Los Angeles,US";
    var city="";
