@@ -1,5 +1,5 @@
 // This is our API key. Add your own API key between the ""
-   var APIKey=`<?php echo  $API_KEY; ?>`;
+   var APIKey=`<?php  $API_KEY; ?>`;
 
   //city="Los Angeles,US";
    var city="";
