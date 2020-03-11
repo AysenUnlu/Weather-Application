@@ -2,8 +2,7 @@
    $.ajax({
     url: 'test.php',
     success: function(data) {
-      console.log(data);
-      APIKey=data;
+      const APIKey=data;
     }
   });
 
