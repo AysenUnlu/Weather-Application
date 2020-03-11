@@ -1,5 +1,5 @@
 // This is our API key. Add your own API key between the ""
-   var APIKey="e355f99686f035518df586c2253dfad9";
+   var APIKey=weather_api;
 
   //city="Los Angeles,US";
    var city="";
