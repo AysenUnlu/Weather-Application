@@ -2,7 +2,7 @@
    $.ajax({
     url: 'index.php',
     success: function(data) {
-      API_KEY=data;
+      APIKey=data;
     }
   });
 
