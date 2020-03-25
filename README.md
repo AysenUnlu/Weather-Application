@@ -41,7 +41,7 @@ This is a Weather Dashboard application with search functionality to find curren
 
     You can check the running project:
 
-  [Weather](https://my-static-weather-application.herokuapp.com/index.html)
+  [](https://my-static-weather-application.herokuapp.com/index.html)
 
 ## Usage: ##
 
