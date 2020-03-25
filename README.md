@@ -44,49 +44,30 @@ This is a Weather Dashboard application with search functionality to find curren
 
 ## Usage: ##
 
-   - When the user runs the application, he is presented with a Weather Dashboard which shows the current weather conditions as well as 5-day weather forecast for the last searched city. And the user can see his search history. Below shows the screenshot in which user searched before the weather conditions for Los Angeles.
+  ![Welcome Page](images/weather.gif)
 
-     ![Welcome Page](images/Welcome.png)
-     
-     ---------------------------------------------------------------------------------------------------
+   - When the user runs the application, he is presented with a Weather Dashboard which shows the current weather conditions as well as 5-day weather forecast for the last searched city. And the user can see his search history. First the weather conditions for Los Angeles is searched.
 
    - When user enters another city such as Princeton,NJ. The information about that city is going to be shown and the city is added to the search history which you can also see it on left side of the dashboard. If the same city is searched again, there will not be double entries in the search history.
 
-     ![Search City](images/Search.png)
+   - If the user enters a city that does not exists, he will be prompted with a modal which shows the error message. If we enter `Hogwarts`, we'll be presented with an error message stating that it is not found.
 
-     --------------------------------------------------------------
-
-   - If the user enters a city that does not exists, he will be prompted with a modal which shows the error message.
-
-     ![Not Found](images/notFound.png)
-
-     -----------------------------------------------------------------------------------------------------
-
-   - When the user clicks on one of the cities in his search history, the information about current weather and 5-day forecast of the chosen city will be shown on the page. And the city will not be added to the end of the history since there will not be double entries in the search history. Below is shown a screenshot of a case when the user clicks on Los Angeles from his search history. 
-
-     ![Search History](images/History.png)
+   - When the user clicks on one of the cities in his search history, the information about current weather and 5-day forecast of the chosen city will be shown on the page. And the city will not be added to the end of the history since there will not be double entries in the search history. When `Los Angeles` is entered again; without adding that into search history, the information will be shown on the screen.
 
   - When user clicks "Show my Position on Google Map", he will be presented with a map on which his location is marked if he gives permission for the app to use his location. Since at the time, I am not using an API key to access the Google Maps, although the location is shown, the map is not loaded properly and has message "for development purposes only" But the user still can zoom in and out of his location.
-    
-     ![Location Permission](images/Permission.png)
-     ![Can Not Load](images/cantLoad.png)
-     ![Current Location](images/CurrentLocation.png)
 
-- If the user deletes his search history, it will be deleted from the local storage too and even if the page is refreshed, the screen will look like below:
+  - If the user deletes his search history, it will be deleted from the local storage too and even if the page is refreshed, the screen will be the same
 
-     ![Delete History](images/deleteHistory.png)
-
-   
 
 ---------------------------------------------------------------------------------------------------------------------------
 
 ## How: ##
 
-* When the page is loaded, the "loadCities" function is fired up. In this function, the search history is fetched from the local storage and each city in the history is added to the list on the left part of the page by "addToList function. The last entry of the search history which is also the last searched city is passed as a parameter to the function "currentWeather" which shows the current weather and forecast for the last searched city.
+* When the page is loaded, the "loadCities" function is fired up. In this function, the search history is fetched from the local storage and each city in the history is added to the list on the left part of the page by "addToList" function. The last entry of the search history which is also the last searched city is passed as a parameter to the function "currentWeather" which shows the current weather and forecast for the last searched city.
 
 * "addToList" function dynamically adds the passed city on the page where previous searches are shown. It also sets the data-value attribute to the city's name for finding out about the city when the corresponding button is clicked.
 
-* "currentWeather" function is passed the city as an argument to show the weather information about that city. Ajax call is made to the OpenWeather API, by including the city and the API Key in the search query. If the call returns with a 404-not found error, error message of city not being found will be shown in a modal to the user. If the call is a success than the weather information will be returned in "response" variable. Name of the city, date and icon code will be extracted from the returned data. By using the icon code and the address for the weather images to update the "src" attribute, image is formed and added dynamically to the page. Temperature information returned was in Kelvin and is converted to Fahreneit. Wind speed is converted from meters per second to miles per hour (MPH). Humidity data is also extracted from response. "UVIndex" function is called with coordinate information and it returns the UV Index of the city. To fetch UV index another AJAX call is made in the "UVIndex" function by including the latitute and longituteinformation in the query url. And uv index for that city is shown on the page. "forecast" function is called with the city id. When the ajax call was success (which is determined by the code 200), the citites will be fetched from local storage. If there are no entries in the local storage, the city will be stored in the storage and also will be shown on the page where the search history is displayed. If there are entries in the storage, by using "find" function, we will search the entries from the storage to see if the city exists; if it exists,to prevent double entry, it won't be added to the storage or the page. If it does not previously searched, then it will be added to the storage and the page.
+* "currentWeather" function is passed the city as an argument to show the weather information about that city. Ajax call is made to the OpenWeather API, by including the city and the API Key in the search query. If the call returns with a 404-not found error, error message of city not being found will be shown in a modal to the user. If the call is a success than the weather information will be returned in "response" variable. Name of the city, date and icon code will be extracted from the returned data. By using the icon code and the address for the weather images to update the "src" attribute, image is formed and added dynamically to the page. Temperature information returned was in Kelvin and is converted to Fahreneit. Wind speed is converted from meters per second to miles per hour (MPH). Humidity data is also extracted from response. "UVIndex" function is called with coordinate information and it returns the UV Index of the city. To fetch UV index another AJAX call is made in the "UVIndex" function by including the latitute and longitute information in the query url. And uv index for that city is shown on the page. "forecast" function is called with the city id. When the ajax call was success (which is determined by the code 200), the citites will be fetched from local storage. If there are no entries in the local storage, the city will be stored in the storage and also will be shown on the page where the search history is displayed. If there are entries in the storage, by using "find" function, we will search the entries from the storage to see if the city exists; if it exists,to prevent double entry, it won't be added to the storage or the page. If it does not previously searched, then it will be added to the storage and the page.
 
 *  "forecast" function displays the 5-day forecast. API call id made with city id to get the forecast and for each day, data (date,icon,temp, humidity) is extracted and is shown on the page. 
 
@@ -115,4 +96,4 @@ Anybody is welcomed to copy code snippets and test it out.
 
 ## Limitations: ##
 
- Since the API key for google maps can not be acquired without giving credit card information, I used the default settings. Although it shows the user's location correctly, the map has not been downloaded correctly. 
+ Since the API key for google maps can not be acquired without giving credit card information, I used the default settings. Although it shows the user's location correctly, the map has not been downloaded properly. 
